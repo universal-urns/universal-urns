@@ -79,7 +79,23 @@
         <p><strong>Grand Total:</strong> <span id="grand-total">$0.00</span></p>
       </div>
       <button type="submit" class="btn">View Printable Summary</button>
-      <button type="button" class="btn">Place Order Now</button>
+      
+<button id="payButton" type="button">Pay Now</button>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
+  document.getElementById("payButton").addEventListener("click", async function () {
+    const totalText = document.getElementById("total").textContent || "0";
+    const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+    const response = await fetch("/.netlify/functions/checkout", {
+      method: "POST",
+      body: JSON.stringify({ amount: total })
+    });
+    const session = await response.json();
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  });
+</script>
+
     </form>
   </main>
   <footer>
