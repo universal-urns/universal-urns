@@ -151,5 +151,38 @@
     window.location.href = "order-summary-crystal.html";
   }
 </script>
+
+<button id="payButton" type="button">Pay Now</button>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const payButton = document.getElementById("payButton");
+    if (payButton) {
+      payButton.addEventListener("click", async function () {
+        const totalSpan = document.getElementById("total");
+        if (!totalSpan) return;
+        const totalText = totalSpan.textContent || "0";
+        const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+        const response = await fetch("/.netlify/functions/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ amount: total })
+        });
+        const session = await response.json();
+        if (session.id) {
+          await stripe.redirectToCheckout({ sessionId: session.id });
+        } else {
+          alert("Error creating Stripe Checkout session.");
+        }
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
