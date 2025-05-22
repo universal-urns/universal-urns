@@ -154,6 +154,10 @@
 
 <button id="payButton" type="button">Pay Now</button>
 
+
+
+
+
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
@@ -171,13 +175,14 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ amount: total })
+          body: JSON.stringify({ amount: Math.round(total * 100) })
         });
         const session = await response.json();
         if (session.id) {
           await stripe.redirectToCheckout({ sessionId: session.id });
         } else {
           alert("Error creating Stripe Checkout session.");
+          console.error(session.error || "Unknown error");
         }
       });
     }
