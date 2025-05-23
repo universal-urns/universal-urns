@@ -164,31 +164,22 @@
 
   window.addEventListener('DOMContentLoaded', () => {
     const payButton = document.getElementById("payButton");
-if (payButton) {
-  payButton.addEventListener("click", async function () {
-    const totalSpan = document.getElementById("grand-total");
-    if (!totalSpan) return;
-    const totalText = totalSpan.textContent || "0";
-    const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
-    const amountInCents = Math.round(total * 100);
-
-    const response = await fetch("/.netlify/functions/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ amount: amountInCents })
-    });
-
-    const session = await response.json();
-    if (session.id) {
-      stripe.redirectToCheckout({ sessionId: session.id });
-    } else {
-      alert("Error creating Stripe Checkout session.");
-      console.error(session.error || "Unknown error");
-    }
-    });
-};
+    if (payButton) {
+      payButton.addEventListener("click", async function () {
+        const totalSpan = document.getElementById("total");
+        if (!totalSpan) return;
+        const totalText = totalSpan.textContent || "0";
+        const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+        const response = await fetch("/.netlify/functions/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ amount: amountInCents })
+        });
+        const session = await response.json();
+        if (session.id) {
+          await stripe.redirectToCheckout({ sessionId: session.id });
         } else {
           alert("Error creating Stripe Checkout session.");
           console.error(session.error || "Unknown error");
