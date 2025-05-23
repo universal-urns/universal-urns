@@ -171,9 +171,10 @@ if (payButton) {
       },
       body: JSON.stringify({ amount: amountInCents })
     });
+
     const session = await response.json();
     if (session.id) {
-      await stripe.redirectToCheckout({ sessionId: session.id });
+      stripe.redirectToCheckout({ sessionId: session.id });
     } else {
       alert("Error creating Stripe Checkout session.");
       console.error(session.error || "Unknown error");
