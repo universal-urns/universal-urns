@@ -175,7 +175,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ amount: amountInCents })
+          body: JSON.stringify({ amount: Math.round(total * 100) })
         });
         const session = await response.json();
         if (session.id) {
