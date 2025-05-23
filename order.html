@@ -151,6 +151,10 @@
 
 
 <script src="https://js.stripe.com/v3/"></script>
+
+
+
+<script src="https://js.stripe.com/v3/"></script>
 <script>
   const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
 
@@ -162,19 +166,26 @@
         if (!totalSpan) return;
         const totalText = totalSpan.textContent || "0";
         const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
-        const response = await fetch("/.netlify/functions/checkout", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ amount: Math.round(total * 100) })
-        });
-        const session = await response.json();
-        if (session.id) {
-          await stripe.redirectToCheckout({ sessionId: session.id });
-        } else {
-          alert("Error creating Stripe Checkout session.");
-          console.error(session.error || "Unknown error");
+        const amountInCents = Math.round(total * 100);
+
+        try {
+          const response = await fetch("/.netlify/functions/checkout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ amount: amountInCents })
+          });
+          const session = await response.json();
+          if (session.id) {
+            await stripe.redirectToCheckout({ sessionId: session.id });
+          } else {
+            alert("Error creating Stripe Checkout session.");
+            console.error(session.error || "Unknown error");
+          }
+        } catch (error) {
+          console.error("Payment Error:", error);
+          alert("Something went wrong during payment.");
         }
       });
     }
