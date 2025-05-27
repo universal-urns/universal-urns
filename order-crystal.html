@@ -170,7 +170,7 @@
         if (!totalSpan) return;
         const totalText = totalSpan.textContent || "0";
         const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
-        const response = await fetch("/.netlify/functions/create-checkout-session", {
+        const response = await fetch("/.netlify/functions/checkout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
