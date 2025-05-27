@@ -1,0 +1,12 @@
+
+# Ignore node modules and environment files
+node_modules/
+.env
+.DS_Store
+
+# Ignore local Netlify CLI settings
+.netlify/
+
+# Ignore build artifacts
+dist/
+build/

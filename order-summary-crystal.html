@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crystal Order Summary</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .customer-info {
+            border: 1px solid black;
+            padding: 10px;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Crystal Order Summary</h1>
+
+    <div class="customer-info">
+        <p><strong>Name:</strong> <span id="custName"></span></p>
+        <p><strong>Email:</strong> <span id="custEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="custPhone"></span></p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="orderTableBody"></tbody>
+    </table>
+    <h2 style="text-align: center;">Grand Total: <span id="grandTotal">$0.00</span></h2>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.print()">Print / Download PDF</button>
+    </div>
+
+<script>
+window.onload = function() {
+    const data = JSON.parse(localStorage.getItem("crystalOrderData")) || [];
+    const customer = JSON.parse(localStorage.getItem("crystalCustomerInfo")) || {};
+
+    document.getElementById("custName").innerText = customer.name || "";
+    document.getElementById("custEmail").innerText = customer.email || "";
+    document.getElementById("custPhone").innerText = customer.phone || "";
+
+    const table = document.getElementById("orderTableBody");
+    let grandTotal = 0;
+
+    data.forEach(item => {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = item.item;
+        row.insertCell(1).innerText = item.description;
+        row.insertCell(2).innerText = item.qty;
+        row.insertCell(3).innerText = "$" + item.price;
+        row.insertCell(4).innerText = "$" + item.total;
+        grandTotal += parseFloat(item.total);
+    });
+
+    document.getElementById("grandTotal").innerText = "$" + grandTotal.toFixed(2);
+}
+</script>
+
+</body>
+</html>

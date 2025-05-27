@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crystal Urn Order</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body class="crystal-page fade in" style="background-image: url('Images/crystal-urn-mantel.png'); background-size: cover; background-position: center;">
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="product.html">Niche Urns</a>
+<a href="order.html">Niche Urns Order</a>
+<a href="contact.html">Contact</a>
+<a href="crystal.html">Custom Crystal</a>
+<a href="order-crystal.html">Crystal Order</a>
+</nav>
+<div class="form-container">
+<h1 style="text-align: center;">Crystal Urn Order Form</h1>
+<form>
+
+<table style="width: 100%;">
+<thead>
+<tr><th>Crystal Shape</th><th>Description</th><th>Item #</th><th>Preview</th><th>Dimensions</th><th>Capacity</th><th>Imprint Area</th><th>Weight</th><th>Price</th><th>Shipping</th>
+<th>Quantity</th><th>Total</th></tr>
+</thead>
+<tbody>
+<tr><td>Illumachrome imprinted</td><td rowspan="3" style="width:30%; white-space: normal; text-align: center; vertical-align: middle;">
+        Featuring a hollow cylinder, this crystal rectangle has space to showcase any loved ones’ belongings.
+        Make this award your own by adding any non-liquid substrate (not included) to the cylinder.
+        Simply flip the award upside down, add the non-liquid substrate of your choice up to the first inner ridge,
+        close it up with the crystal stopper, flip the award right-side up, and place it on the included base!
+      </td><td>R1</td><td><img class="preview-img" src="Images/crystal-tom.png" style="width:100px;"/></td><td>4.75" W x 3.25" H x 2.25" D</td><td>3.5 Tbsp</td><td>2.25" W x 2.5" H</td><td>5.75 lbs</td><td>$218.05</td><td>$24.70</td><td><input id="qty00" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total00">0.00</span></td></tr>
+<tr><td></td><td>R2</td><td><img class="preview-img" src="Images/crystal-tom.png" style="width:100px;"/></td><td>6" W x 3.5" H x 3" D</td><td>6 Tbsp</td><td>2.75" W x 3" H</td><td>8.75 lbs</td><td>$280.77</td><td>$26.23</td><td><input id="qty01" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total01">0.00</span></td></tr>
+<tr><td></td><td>R3</td><td><img class="preview-img" src="Images/crystal-tom.png" style="width:100px;"/></td><td>7.25" W x 4.75" H x 3.25" D</td><td>6 Tbsp</td><td>3.75" W x 4" H</td><td>13 lbs</td><td>$344.48</td><td>$36.87</td><td><input id="qty02" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total02">0.00</span></td></tr>
+<tr><td>Cut Corner Cube w/ Base</td><td rowspan="2" style="width:30%; white-space: normal; text-align: center; vertical-align: middle;">
+        Show off your family with the Cut Corner Cube featured on a lighted base.
+        Resting on a flat edge, your loved ones will be prominently displayed in this delicate cube.
+        The 3D subsurface imprint makes for an even more spectacular display lit up by the lighted base!
+      </td><td>C2</td><td><img class="preview-img" src="Images/crystal-square.png" style="width:100px;"/></td><td>2.38" W x 2.38" H x 2.38" D</td><td>—</td><td>2" W x 2" H</td><td>4.8 lbs</td><td>$154.85</td><td>$18.47</td><td><input id="qty03" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total03">0.00</span></td></tr>
+<tr><td></td><td>C3</td><td><img class="preview-img" src="Images/crystal-square.png" style="width:100px;"/></td><td>2.75" W x 2.75" H x 2.75" D</td><td>—</td><td>2.5" W x 2.5" H</td><td>5.9 lbs</td><td>$179.25</td><td>$21.29</td><td><input id="qty04" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total04">0.00</span></td></tr>
+<tr><td>Tribute Memorial</td><td style="width:30%; white-space: normal;">
+        The Tribute Memorial combines elegance and function with a solid crystal frame designed to honor and preserve a cherished memory.
+        Precision-etched with a 3D image, this piece is ideal for display in any setting and serves as a heartfelt tribute.
+      </td><td>WS1/BS1</td><td><img alt="WS1/BS1 Preview" class="preview-img" src="Images/crystal-heart.png" style="width:100px;"/></td><td>5" W x 5" H x 2" D</td><td>5 Tbsp</td><td>3" W x 2.5" H</td><td>9.25 lbs</td><td>$285.95</td><td>$36.87</td><td><input id="qty05" min="0" onchange="updateCrystalTotal()" type="number" value="0"/></td><td>$<span id="total05">0.00</span></td></tr>
+</tbody>
+</table>
+<div class="totals">
+<p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
+<p><strong>Tax (7%):</strong> $<span id="tax">0.00</span></p>
+<p><strong>Grand Total:</strong> $<span id="total">0.00</span></p>
+</div>
+<h3>Upload Photos (optional)</h3>
+<p style="color:white; text-shadow: 1px 1px 4px black;">
+    You may upload a photo to be etched for any urn shape ordered.
+</p>
+<label for="photo1" style="color:white;">Upload Photo 1:</label>
+<input id="photo1" name="photo1" type="file"/><br/><br/>
+<label for="photo2" style="color:white;">Upload Photo 2:</label>
+<input id="photo2" name="photo2" type="file"/><br/><br/>
+<label for="photo3" style="color:white;">Upload Photo 3:</label>
+<input id="photo3" name="photo3" type="file"/><br/><br/>
+<label for="photo4" style="color:white;">Upload Photo 4:</label>
+<input id="photo4" name="photo4" type="file"/><br/><br/>
+<h3>Customer Information</h3>
+<label for="custName">Full Name:</label><br/>
+<input id="custName" name="custName" required="" style="max-width: 400px;" type="text"/><br/><br/>
+<label for="custEmail">Email Address:</label><br/>
+<input id="custEmail" name="custEmail" required="" style="max-width: 400px;" type="email"/><br/><br/>
+<label for="custPhone">Phone Number:</label><br/>
+<input id="custPhone" name="custPhone" style="max-width: 400px;" type="text"/><br/><br/>
+<button type="submit">Submit Order</button>
+<button onclick="saveCrystalOrder()" type="button">View Printable Summary</button>
+</form>
+</div>
+<script>
+  function updateCrystalTotal() {
+    const prices = [218.05, 280.77, 344.48, 154.85, 179.25, 285.95];
+    let subtotal = 0;let taxRate = 0.07;
+
+    let qtyIds = ["qty00","qty01","qty02","qty03","qty04","qty05"];
+    let totalIds = ["total00","total01","total02","total03","total04","total05"];
+
+    prices.forEach((price, i) => {
+      const qty = parseInt(document.getElementById(qtyIds[i]).value) || 0;
+      const shippingRates = [24.70, 26.23, 36.87, 18.47, 21.29, 36.87];
+      const rowTotal = qty * (price + shippingRates[i]);
+      document.getElementById(totalIds[i]).textContent = rowTotal.toFixed(2);
+      subtotal += rowTotal;
+    });
+
+    const tax = subtotal * taxRate;
+    const total = subtotal + tax;
+
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    document.getElementById("tax").textContent = tax.toFixed(2);document.getElementById("total").textContent = total.toFixed(2);
+  }
+</script>
+<script>
+  function updateCrystalTotal() {
+    const prices = [218.05, 280.77, 344.48, 154.85, 179.25, 285.95];
+    let subtotal = 0;let taxRate = 0.07;
+
+    let qtyIds = ["qty00","qty01","qty02","qty03","qty04","qty05"];
+    let totalIds = ["total00","total01","total02","total03","total04","total05"];
+
+    prices.forEach((price, i) => {
+      const qty = parseInt(document.getElementById(qtyIds[i]).value) || 0;
+      const shippingRates = [24.70, 26.23, 36.87, 18.47, 21.29, 36.87];
+      const rowTotal = qty * (price + shippingRates[i]);
+      document.getElementById(totalIds[i]).textContent = rowTotal.toFixed(2);
+      subtotal += rowTotal;
+    });
+
+    const tax = subtotal * taxRate;
+    const total = subtotal + tax;
+
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    document.getElementById("tax").textContent = tax.toFixed(2);document.getElementById("total").textContent = total.toFixed(2);
+  }
+
+  function saveCrystalOrder() {
+    const prices = [218.05, 280.77, 344.48, 154.85, 179.25, 285.95];
+    const qtyIds = ["qty00","qty01","qty02","qty10","qty11","qty20"];
+    let orderData = [];
+
+    prices.forEach((price, i) => {
+      const qty = parseInt(document.getElementById(qtyIds[i]).value) || 0;
+      if (qty > 0) {
+        orderData.push({
+          item: document.querySelectorAll("tbody tr")[i].children[0].innerText,
+          description: document.querySelectorAll("tbody tr")[i].children[1].innerText,
+          qty: qty,
+          price: price.toFixed(2),
+          total: (qty * price).toFixed(2)
+        });
+      }
+    });
+
+    const customerInfo = {
+      name: document.getElementById("custName").value,
+      email: document.getElementById("custEmail").value,
+      phone: document.getElementById("custPhone").value
+    };
+
+    localStorage.setItem("crystalOrderData", JSON.stringify(orderData));
+    localStorage.setItem("crystalCustomerInfo", JSON.stringify(customerInfo));
+
+    window.location.href = "order-summary-crystal.html";
+  }
+</script>
+
+<button id="payButton" type="button">Pay Now</button>
+
+
+
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const payButton = document.getElementById("payButton");
+    if (payButton) {
+      payButton.addEventListener("click", async function () {
+        const totalSpan = document.getElementById("total");
+        if (!totalSpan) return;
+        const totalText = totalSpan.textContent || "0";
+        const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+        const response = await fetch("/.netlify/functions/create-checkout-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ amount: Math.round(total * 100) })
+        });
+        const session = await response.json();
+        if (session.id) {
+          await stripe.redirectToCheckout({ sessionId: session.id });
+        } else {
+          alert("Error creating Stripe Checkout session.");
+          console.error(session.error || "Unknown error");
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

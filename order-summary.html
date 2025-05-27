@@ -1,0 +1,92 @@
+<!-- order-summary.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQVWWE6DCM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NQVWWE6DCM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Printable Order Summary | Universal urnS</title>
+  <meta name="description" content="A printable receipt for your urn purchase including totals, tax, and shipping. Save or print your record instantly.">
+  <meta property="og:title" content="Printable Order Summary | Universal urnS" />
+  <meta property="og:description" content="A printable receipt for your urn purchase including totals, tax, and shipping. Save or print your record instantly." />
+  <meta property="og:image" content="https://universalurns.netlify.app/Images/background.png" />
+  <meta property="og:url" content="https://universalurns.netlify.app/order-summary.html" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: white;
+      color: black;
+    }
+    h1 { margin-bottom: 20px; }
+    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+    .totals p { font-size: 16px; margin: 5px 0; }
+    .print-btn { margin-top: 20px; }
+  </style>
+</head>
+<body class="fade-in">
+  <h1>Order Confirmation</h1>
+  <p><strong>Name:</strong> <span id="summary-name"></span></p>
+  <p><strong>Email:</strong> <span id="summary-email"></span></p>
+  <p><strong>Shipping Address:</strong><br><span id="summary-address"></span></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Urn Type</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cylinder (Brown)</td>
+        <td id="qty1"></td>
+        <td id="total1"></td>
+      </tr>
+      <tr>
+        <td>Rectangle (Gold)</td>
+        <td id="qty2"></td>
+        <td id="total2"></td>
+      </tr>
+      <tr>
+        <td>Rectangle (Brown)</td>
+        <td id="qty3"></td>
+        <td id="total3"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="totals">
+    <p><strong>Subtotal:</strong> <span id="sum-subtotal"></span></p>
+    <p><strong>Tax (7%):</strong> <span id="sum-tax"></span></p>
+    <p><strong>Ground Shipping:</strong> <span id="sum-shipping"></span></p>
+    <p><strong>Grand Total:</strong> <span id="sum-grand"></span></p>
+  </div>
+  <button onclick="window.print()" class="print-btn">Print or Save as PDF</button>
+  <script>
+    const data = JSON.parse(localStorage.getItem('summaryData') || '{}');
+    document.getElementById('summary-name').textContent = data.name || '';
+    document.getElementById('summary-email').textContent = data.email || '';
+    document.getElementById('summary-address').textContent = data.address || '';
+    document.getElementById('qty1').textContent = data.qtys?.[0] || '';
+    document.getElementById('qty2').textContent = data.qtys?.[1] || '';
+    document.getElementById('qty3').textContent = data.qtys?.[2] || '';
+    document.getElementById('total1').textContent = data.totals?.[0] || '';
+    document.getElementById('total2').textContent = data.totals?.[1] || '';
+    document.getElementById('total3').textContent = data.totals?.[2] || '';
+    document.getElementById('sum-subtotal').textContent = data.subtotal || '';
+    document.getElementById('sum-tax').textContent = data.tax || '';
+    document.getElementById('sum-shipping').textContent = data.shipping || '';
+    document.getElementById('sum-grand').textContent = data.grand || '';
+  </script>
+</body>
+</html>

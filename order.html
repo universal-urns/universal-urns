@@ -1,0 +1,185 @@
+<!-- order.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NQVWWE6DCM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NQVWWE6DCM');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Urns Online | Secure Checkout | Universal urnS</title>
+  <meta name="description" content="Order premium aluminum urns online. Safe checkout with shipping and tax calculated. Free shipping on 12+ urns.">
+  <meta property="og:title" content="Order Urns Online | Secure Checkout | Universal urnS" />
+  <meta property="og:description" content="Order premium aluminum urns online. Safe checkout with shipping and tax calculated. Free shipping on 12+ urns." />
+  <meta property="og:image" content="https://universalurns.netlify.app/Images/background.png" />
+  <meta property="og:url" content="https://universalurns.netlify.app/order.html" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="fade-in">
+  <img src="Images/usa-badge.png" alt="USA Badge" class="flag-badge" />
+ <nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="product.html">Niche Urns</a>
+  <a href="order.html">Niche Urns Order</a>
+  <a href="contact.html">Contact</a>
+  <a href="crystal.html">Custom Crystal</a>
+  <a href="order-crystal.html">Crystal Order</a>
+</nav>
+  <main>
+    <h1>Universal urnS Order Form </h1>
+    <p class="free-shipping-msg">Enjoy FREE Ground Shipping on orders of 12 or more urns!</p>
+    <form id="order-form" onsubmit="saveAndOpenSummary(); return false;">
+      <label><strong>Full Name:</strong></label><br>
+      <input type="text" id="fullName" required><br><br>
+      <label><strong>Email Address:</strong></label><br>
+      <input type="email" id="email" required><br><br>
+      <label><strong>Shipping Address:</strong></label><br>
+      <textarea id="address" rows="3" required></textarea><br><br>
+      <table>
+        <thead>
+          <tr>
+            <th>Urn Type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cylinder (Brown)</td>
+            <td>$125</td>
+            <td><input type="number" value="0" min="0" class="quantity" /></td>
+            <td class="line-total">$0.00</td>
+          </tr>
+          <tr>
+            <td>Rectangle (Gold)</td>
+            <td>$125</td>
+            <td><input type="number" value="0" min="0" class="quantity" /></td>
+            <td class="line-total">$0.00</td>
+          </tr>
+          <tr>
+            <td>Rectangle (Brown)</td>
+            <td>$125</td>
+            <td><input type="number" value="0" min="0" class="quantity" /></td>
+            <td class="line-total">$0.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="totals">
+        <p><strong>Subtotal:</strong> <span id="subtotal">$0.00</span></p>
+        <p><strong>Tax (7%):</strong> <span id="tax">$0.00</span></p>
+        <p><strong>Ground Shipping:</strong> <span id="shipping">$0.00</span></p>
+        <p><strong>Grand Total:</strong> <span id="grand-total">$0.00</span></p>
+      </div>
+      <button type="submit" class="btn">View Printable Summary</button>
+      
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2025 Universal urnS. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+  <script>
+    const quantities = document.querySelectorAll('.quantity');
+    const lineTotals = document.querySelectorAll('.line-total');
+    const subtotalSpan = document.getElementById('subtotal');
+    const taxSpan = document.getElementById('tax');
+    const shippingSpan = document.getElementById('shipping');
+    const grandTotalSpan = document.getElementById('grand-total');
+
+    function updateTotals() {
+      let subtotal = 0;
+      quantities.forEach((input, index) => {
+        const qty = parseInt(input.value) || 0;
+        const total = qty * 125;
+        lineTotals[index].textContent = `$${total.toFixed(2)}`;
+        subtotal += total;
+      });
+
+      const tax = subtotal * 0.07;
+      let shipping = 0;
+      if (subtotal >= 125 && subtotal <= 625) {
+        shipping = 30;
+      } else if (subtotal >= 750 && subtotal <= 1375) {
+        shipping = 60;
+      } else if (subtotal > 1500) {
+        shipping = 0;
+      }
+
+      const grand = subtotal + tax + shipping;
+      subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+      taxSpan.textContent = `$${tax.toFixed(2)}`;
+      shippingSpan.textContent = `$${shipping.toFixed(2)}`;
+      grandTotalSpan.textContent = `$${grand.toFixed(2)}`;
+    }
+
+    function saveAndOpenSummary() {
+      updateTotals();
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const address = document.getElementById('address').value;
+
+      const qtys = Array.from(document.querySelectorAll('.quantity')).map(q => q.value);
+      const totals = Array.from(document.querySelectorAll('.line-total')).map(t => t.textContent);
+
+      localStorage.setItem('summaryData', JSON.stringify({
+        name, email, address,
+        qtys, totals,
+        subtotal: subtotalSpan.textContent,
+        tax: taxSpan.textContent,
+        shipping: shippingSpan.textContent,
+        grand: grandTotalSpan.textContent
+      }));
+
+      window.open('order-summary.html', '_blank');
+    }
+
+    quantities.forEach(input => input.addEventListener('input', updateTotals));
+    updateTotals();
+  </script>
+
+<button id="payButton" type="button">Pay Now</button>
+
+
+
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_live_51RRG48BunVsXQdfqdeVX8DmZxDtrZqFytVARwqwyiPz1vhHMFkrBnHceyRJtfXDD7ayoUuT32VzaU4H7k7Hb4smL00uS3tbvTZ");
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const payButton = document.getElementById("payButton");
+    if (payButton) {
+      payButton.addEventListener("click", async function () {
+        const totalSpan = document.getElementById("grand-total");
+        if (!totalSpan) return;
+        const totalText = totalSpan.textContent || "0";
+        const total = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+        const response = await fetch("/.netlify/functions/create-checkout-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ amount: Math.round(total * 100) })
+        });
+        const session = await response.json();
+        if (session.id) {
+          await stripe.redirectToCheckout({ sessionId: session.id });
+        } else {
+          alert("Error creating Stripe Checkout session.");
+          console.error(session.error || "Unknown error");
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
